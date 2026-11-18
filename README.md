@@ -16,6 +16,9 @@ certificate. Click **More info**, then **Run anyway**.
 
 Needs Windows 10 or 11 (64-bit).
 
+All versions stay available: older ones can be downloaded from the
+[list of all releases](https://github.com/jakentta/panshow/releases).
+
 ## Using it
 
 The first time, the settings window opens: choose your photo folder and press
@@ -32,8 +35,12 @@ Only the photos are shown, with no text and no mouse pointer. Photos are shown i
 every photo once before any comes again.
 
 Settings include: photo folder, which screen to use (automatically the biggest one), seconds per
-photo, crossfade length, order, amount of movement, sharpness versus movement, and how to show
-tall (portrait) photos.
+photo, crossfade length (in 0.1 s steps), order, amount of movement, sharpness versus movement,
+camera path (gently curved or straight), gentle tilt, and how to show tall (portrait) photos.
+
+**Tip for a TV or second screen:** press Win+P and choose *Extend* or *Second screen only*.
+In *Duplicate* mode Windows gives both screens the same (smaller) resolution, so a 4K screen
+would not get a real 4K picture.
 
 ## How the camera works
 
@@ -43,6 +50,9 @@ tall (portrait) photos.
   a move.
 - Zoom changes at an even pace to the eye (logarithmic), moves ease in and out gently, and they
   overlap the crossfades so the picture never stops and restarts.
+- The camera travels on a gentle arc (or straight, if you prefer), and can optionally turn the
+  photo very slightly (under one degree) while it moves. Photos with horizons or buildings are
+  never tilted, because they would look crooked.
 - Photos are never enlarged beyond their real pixels unless you allow it, so they stay sharp.
 - The next photo is prepared in a separate background process, so loading never makes the
   motion stutter.
