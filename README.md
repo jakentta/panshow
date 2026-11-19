@@ -37,8 +37,10 @@ every photo once before any comes again.
 Settings include: photo folder, which screen to use (automatically the biggest one), seconds per
 photo, crossfade length (in 0.1 s steps), order, amount of movement, sharpness versus movement,
 camera path (gently curved or straight), gentle tilt, flowing moves, how to show tall
-(portrait) photos, and **music**: songs (mp3, flac, wav, ogg) from a folder you choose, with the
-option to change photos on the beat (the time per photo then varies by at most 15%).
+(portrait) photos, and **music**, with the option to change photos on the beat (the time per
+photo then varies by at most 15%). Music can be songs from a folder (mp3, flac, wav, ogg), or
+Panshow can **listen** to what the computer plays (Spotify, YouTube Music, web radio... in their
+own apps) or through the microphone (music from another speaker) and follow that beat live.
 
 **Tip for a TV or second screen:** press Win+P and choose *Extend* or *Second screen only*.
 In *Duplicate* mode Windows gives both screens the same (smaller) resolution, so a 4K screen
@@ -73,6 +75,8 @@ goes back to the previous one. Automatic updates can be switched off in the sett
 - Your photos never leave your computer.
 - Settings and remembered face positions are stored only on your computer
   (`%APPDATA%\Panshow` and `%LOCALAPPDATA%\Panshow`).
+- When Panshow listens to the computer's sound or the microphone, the sound is only analysed
+  on the fly to find the beat; it is never recorded, stored or sent anywhere.
 - The only internet connection is the update check, which asks GitHub for the latest version
   file. Nothing about you or your photos is sent (GitHub sees your IP address, as with any web
   request). Switch automatic updates off to stop it.
