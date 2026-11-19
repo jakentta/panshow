@@ -36,7 +36,9 @@ every photo once before any comes again.
 
 Settings include: photo folder, which screen to use (automatically the biggest one), seconds per
 photo, crossfade length (in 0.1 s steps), order, amount of movement, sharpness versus movement,
-camera path (gently curved or straight), gentle tilt, flowing moves, how to show tall
+camera path (gently curved or straight), gentle tilt, flowing moves, two energetic movement
+styles: **Wild** (fast moves, big tilts, quick cuts) and **Hyperdrive** (even wilder, with zoom
+punches and twists on the beat), how to show tall
 (portrait) photos, and **music**, with the option to change photos on the beat (the time per
 photo then varies by at most 15%). Music can be songs from a folder (mp3, flac, wav, ogg), or
 Panshow can **listen** to what the computer plays (Spotify, YouTube Music, web radio... in their
