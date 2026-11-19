@@ -36,7 +36,9 @@ every photo once before any comes again.
 
 Settings include: photo folder, which screen to use (automatically the biggest one), seconds per
 photo, crossfade length (in 0.1 s steps), order, amount of movement, sharpness versus movement,
-camera path (gently curved or straight), gentle tilt, and how to show tall (portrait) photos.
+camera path (gently curved or straight), gentle tilt, flowing moves, how to show tall
+(portrait) photos, and **music**: songs (mp3, flac, wav, ogg) from a folder you choose, with the
+option to change photos on the beat (the time per photo then varies by at most 15%).
 
 **Tip for a TV or second screen:** press Win+P and choose *Extend* or *Second screen only*.
 In *Duplicate* mode Windows gives both screens the same (smaller) resolution, so a 4K screen
@@ -44,8 +46,10 @@ would not get a real 4K picture.
 
 ## How the camera works
 
-- Faces are found on your own computer (OpenCV YuNet). The camera pushes in or pulls out on a
-  face, frames a group, or drifts from one face to another. Faces sit near the rule-of-thirds
+- Faces are found on your own computer (OpenCV YuNet), and so are pets, other animals and
+  people seen without their face (YOLOX). The camera pushes in or pulls out on a face or pet,
+  frames a group, or drifts from one to another. With *flowing moves*, each photo's movement
+  continues the previous one, so the crossfades feel like one camera move. Faces sit near the rule-of-thirds
   lines with room above them, and are never cut by the edge of the frame at the start or end of
   a move.
 - Zoom changes at an even pace to the eye (logarithmic), moves ease in and out gently, and they
@@ -76,5 +80,5 @@ goes back to the previous one. Automatic updates can be switched off in the sett
 ## Licences
 
 Panshow is free to use. It is built with open-source components (Python, OpenCV, NumPy,
-Pillow, pi-heif/libheif, moderngl, GLFW, cryptography and others); their licences are in
+Pillow, pi-heif/libheif, moderngl, GLFW, cryptography, libsndfile, PortAudio and others); their licences are in
 `THIRD-PARTY-NOTICES.txt` in the program folder.
