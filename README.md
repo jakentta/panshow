@@ -34,8 +34,10 @@ The first time, the settings window opens: choose your photo folder and press
 Only the photos are shown, with no text and no mouse pointer. Photos are shown in random order:
 every photo once before any comes again.
 
-Settings include: photo folder, which screen to use (automatically the biggest one), seconds per
-photo, crossfade length (in 0.1 s steps), order, amount of movement, sharpness versus movement,
+Settings include: photo folder (Panshow shows how many photos it found and how long one round
+takes), which screen to use (automatically the biggest one), seconds per
+photo, crossfade length (in 0.1 s steps), order (shuffled, by date taken or by name; continue
+where it stopped; stop after the last photo), amount of movement, sharpness versus movement,
 camera path (gently curved or straight), gentle tilt, flowing moves, two energetic movement
 styles: **Wild** (fast moves, big tilts, quick cuts) and **Hyperdrive** (even faster, with gentle
 zoom pulses on the beat), how to show tall
@@ -47,7 +49,7 @@ own apps) or through the microphone (music from another speaker) and follow that
 
 **Save as video:** the settings window can also make an MP4 video of the slideshow (4K or
 Full HD, 60 frames per second), with your own songs (mp3, flac, wav, ogg) built in and the photo
-changes on their beats. The length follows the music or is set in minutes. Music from streaming
+changes on their beats. The length follows the music, is "every photo once", or is set in minutes. Music from streaming
 services cannot be put into a video; their apps do not hand out the songs. Videos are made
 with Windows' own H.264/AAC encoder (about 300 MB per minute in 4K, 100 MB in Full HD).
 
