@@ -1,0 +1,68 @@
+name: Build
+
+# Builds the Panshow installer on GitHub's own Windows computer, so that the released program
+# can be traced back to exactly this source code. The result can be downloaded under "Artifacts"
+# of the run. Publishing a release (and signing) is a separate, manual step.
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Create the Python environment
+        shell: pwsh
+        run: |
+          python -m venv .venv
+          .venv\Scripts\python.exe -m pip install --upgrade pip
+          .venv\Scripts\python.exe -m pip install -r requirements.txt
+
+      - name: Make sure Inno Setup is available
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup --no-progress -y }
+          if (-not (Test-Path $iscc)) { throw "Inno Setup 6 is not available" }
+
+      - name: Tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($t in @('test_planner.py', 'test_kicks.py', 'test_beats.py')) {
+            .venv\Scripts\python.exe "tools\$t"
+            if ($LASTEXITCODE -ne 0) { throw "$t failed" }
+          }
+          .venv\Scripts\python.exe tools\test_update.py "$env:RUNNER_TEMP\update-test"
+          if ($LASTEXITCODE -ne 0) { throw "test_update.py failed" }
+          .venv\Scripts\python.exe tools\test_order.py "$env:RUNNER_TEMP\order-test"
+          if ($LASTEXITCODE -ne 0) { throw "test_order.py failed" }
+
+      - name: Build the program and the installer
+        shell: pwsh
+        run: ./build.ps1
+
+      - name: Check that the program carries everything it needs
+        shell: pwsh
+        run: |
+          .venv\Scripts\python.exe -m pip install pefile
+          .venv\Scripts\python.exe tools\check_deps.py dist\Panshow
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Panshow-Setup
+          path: dist/Panshow-Setup-*.exe
+          if-no-files-found: error

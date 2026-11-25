@@ -5,6 +5,14 @@ move (the "Ken Burns effect"), drawn live by the graphics card, so it stays shar
 even on a 4K screen. When a photo has faces in it, the camera moves towards them; photos
 without faces get a gentle move towards their most interesting part.
 
+![Panshow in action: camera moves towards faces, pets and interesting parts](docs/demo.webp)
+
+| Aims at faces | Two tall photos side by side | Pets too |
+|---|---|---|
+| ![A close-up of a face, framed by the camera move](docs/face.jpg) | ![Two portraits side by side](docs/pair.jpg) | ![A dog in the middle of a blurred background](docs/pet.jpg) |
+
+*Made by Panshow itself ("Save as video"). Photos: see [docs/CREDITS.md](docs/CREDITS.md).*
+
 ## Download and install
 
 Download **Panshow-Setup-x.y.z.exe** from the
@@ -33,6 +41,8 @@ The first time, the settings window opens: choose your photo folder and press
 
 Only the photos are shown, with no text and no mouse pointer. Photos are shown in random order:
 every photo once before any comes again.
+
+![The Panshow settings window](docs/settings.png)
 
 Settings include: photo folder (Panshow shows how many photos it found and how long one round
 takes), which screen to use (automatically the biggest one), seconds per
@@ -92,8 +102,78 @@ goes back to the previous one. Automatic updates can be switched off in the sett
   file. Nothing about you or your photos is sent (GitHub sees your IP address, as with any web
   request). Switch automatic updates off to stop it.
 
-## Licences
+## Source code and licence
 
-Panshow is free to use. It is built with open-source components (Python, OpenCV, NumPy,
-Pillow, pi-heif/libheif, moderngl, GLFW, cryptography, libsndfile, PortAudio and others); their licences are in
+Panshow is open source under the [MIT licence](LICENSE): you may use, change and share it, also in
+your own programs, as long as the licence text stays with it. The source code is in this
+repository. Panshow was written with the help of the AI assistant Claude, directed by its owner.
+
+The program is built with open-source components (Python, OpenCV, NumPy, Pillow, pi-heif/libheif,
+moderngl, GLFW, cryptography, libsndfile, PortAudio and others); their licences are in
 `THIRD-PARTY-NOTICES.txt` in the program folder.
+
+Found a problem or have an idea? Please open an
+[issue](https://github.com/jakentta/panshow/issues). Describe what you did, what happened, and
+your Windows version and graphics chip. The log file
+`%LOCALAPPDATA%\Panshow\panshow.log` often shows what went wrong (look through it for anything
+personal, such as file names, before you post it).
+
+## Code signing policy
+
+The installer is not signed yet, which is why Windows may show the "Windows protected your PC"
+message above. Panshow is meant to use the free signing offered to open-source projects by the
+SignPath Foundation; if it is accepted, releases will carry:
+
+> Free code signing provided by [SignPath.io](https://about.signpath.io), certificate by
+> [SignPath Foundation](https://signpath.org).
+
+- **Committers and reviewers:** [jakentta](https://github.com/jakentta)
+- **Approvers:** [jakentta](https://github.com/jakentta)
+- **Privacy:** see [Privacy](#privacy) above. Panshow contacts the internet only for its update
+  check, which can be switched off in the settings.
+
+Panshow's automatic updates have their own, separate signature (Ed25519), which installed copies
+check before they install anything. See [ARCHITECTURE.md](ARCHITECTURE.md).
+
+## For developers
+
+How it works inside: [ARCHITECTURE.md](ARCHITECTURE.md).
+
+You need Windows 10 or 11 and Python 3.14. Set up the Python environment once:
+
+```powershell
+python -m venv .venv
+```
+
+```powershell
+.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+Run from source:
+
+```powershell
+.venv\Scripts\python.exe Panshow.py
+```
+
+Build the program and the installer (needs [Inno Setup 6](https://jrsoftware.org/isinfo.php); the
+result is in `dist\`):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build.ps1
+```
+
+The same build runs on GitHub's own computers for every change (see the **Actions** tab), so a
+released installer can be traced back to this source code.
+
+Make a signed release (only the maintainer, who holds the update-signing key; `--publish` uploads
+it to GitHub):
+
+```powershell
+.venv\Scripts\python.exe tools\release.py --notes "What is new"
+```
+
+Test options: `--window 1600x900`, `--sim 3840x2160` (draw at 4K into a window),
+`--seconds 30` (stop and print timing), `--folder PATH`, `--keys "5:right,8:left"`.
+Tests: `tools\test_planner.py`, `tools\test_kicks.py`, `tools\test_beats.py`,
+`tools\test_order.py <scratch folder>`, `tools\test_update.py <scratch folder>`,
+`tools\test_video.py` (needs PyAV as a test-only reader), `tools\check_deps.py dist\Panshow`.
